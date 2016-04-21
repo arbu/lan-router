@@ -1,0 +1,139 @@
+#! /usr/bin/env python2
+# coding: utf-8
+
+import traceback
+import cgi
+import urlparse
+import re
+import dns.resolver
+import dns.query
+import dns.update
+import dns.reversename
+import dns.zone
+import dns.exception
+
+HEADER = """<!doctype html>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="/bootstrap.min.css">
+<title>Domain-Management</title>
+<div class="container">
+  <h2>Domain-Management</h2>
+  <div class="panel panel-default">
+    <div class="panel-heading">Your Domain</div>
+    <div class="panel-body">
+"""
+
+DOMAIN = "      <h4><span class=\"label label-default\">%s</span></h4>"
+NO_DOMAIN = "      <h4><span class=\"label label-Danger\">Could not resolve Domain.</span></h4>"
+
+HEADER2 = """
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">Add a Domain</div>
+    <div class="panel-body">
+      <form class="form-inline">
+        <input type="hidden" name="action" value="add" />
+        <div class="input-group">
+          <input class="form-control" placeholder="domain" name="domain" />
+          <span class="input-group-addon">.lan</span>
+        </div>
+        <button type="submit" class="btn btn-default">Add</button>
+      </form>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">Domain Overview</div>
+      <table class="table">
+        <tr><th>Name</th><th>IP</th><th>Delete</th></tr>
+"""
+
+ROW = """        <tr><td>%s</td><td>%s</td><td>%s</td></tr>
+"""
+
+DELETE = "<a href=\"?action=delete&amp;domain=%s\" class=\"btn btn-default\">🗑 delete</a>"
+
+FOOTER = """      </table>
+    </div>
+  </div>
+</div>"""
+
+def validate_domain(domain):
+	domain = re.sub("-*\.-*", ".", domain.strip("-.").lower())
+	return re.sub("[^a-z0-9.-]", "", domain.encode("idna"))
+
+def app(environ, start_response):
+    start_response('200 OK', [('Content-Type', 'text/html')])
+
+    yield '<h1>FastCGI Environment</h1>'
+    yield '<table>'
+    for k, v in sorted(environ.items()):
+         yield '<tr><th>%s</th><td>%s</td></tr>' % (cgi.escape(k), cgi.escape(v))
+    yield '</table>'
+
+def info_page(env, responde):
+	responde('200 Here you go', [('Content-Type', 'text/html')])
+	yield HEADER
+	try:
+		addr = dns.reversename.from_address(env["REMOTE_ADDR"])
+		yield DOMAIN % str(dns.resolver.query(addr, "PTR")[0])
+	except dns.exception.DNSException:
+		traceback.print_exc()
+		yield NO_DOMAIN
+	yield HEADER2
+	try:
+		zone = dns.zone.from_xfr(dns.query.xfr("127.0.0.1", "lan"))
+		domains = zone.nodes.keys()
+		domains.sort()
+		for domain in domains:
+			a_record = zone.get_rdataset(domain, "a")
+			if a_record:
+				ip = str(a_record.items[0])
+				if ip == env["REMOTE_ADDR"]:
+					delete = DELETE % domain
+				else:
+					delete = ""
+				yield ROW % (domain, ip, delete)
+	except dns.exception.DNSException:
+		traceback.print_exc()
+		yield ROW % ("Error", "loading", "Domains")
+	yield FOOTER 
+
+def domain_add(domain, ip):
+	try:
+		dns.resolver.query(domain + ".lan", "a")
+	except dns.resolver.NXDOMAIN:
+		update = dns.update.Update("lan")
+		update.replace(domain, 300, "a", ip)
+		dns.query.tcp(update, "127.0.0.1")
+
+def domain_delete(domain, ip):
+	answer = dns.resolver.query(domain + ".lan", "a")
+	for record in answer:
+		if record.address == ip:
+			break
+	else:
+		return
+	update = dns.update.Update("lan")
+	update.delete(domain, "a")
+	dns.query.tcp(update, "127.0.0.1")
+		
+
+def domain_manager(env, responde):
+	if not env["QUERY_STRING"]:
+		return info_page(env, responde)
+	params = urlparse.parse_qs(env["QUERY_STRING"])
+	if "action" in params and "domain" in params:
+		domain = validate_domain(params["domain"][0].decode("utf-8"))
+		if domain:
+			if "add" in params["action"]:
+				 domain_add(domain, env["REMOTE_ADDR"])
+			elif "delete" in params["action"]:
+				 domain_delete(domain, env["REMOTE_ADDR"])
+	responde("303 Dit it. Now go back", [("Location", env.get("HTTP_REFERER", env["SCRIPT_NAME"]))])
+	return []
+
+
+if __name__ == "__main__":
+	from flup.server.fcgi import WSGIServer
+	WSGIServer(domain_manager).run()

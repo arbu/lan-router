@@ -1,0 +1,10 @@
+[Match]
+Name=eth0
+
+[Network]
+Address=10.13.37.1/24
+Address=fd00:1337::1/64
+#LinkLocalAddressing=no
+#Gateway=10.13.37.56
+DNS=127.0.0.1
+Domains=lan
