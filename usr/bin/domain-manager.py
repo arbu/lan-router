@@ -12,25 +12,27 @@ import dns.reversename
 import dns.zone
 import dns.exception
 
+import sys
+
 HEADER = """<!doctype html>
 <meta charset="utf-8" />
 <link rel="stylesheet" href="/bootstrap.min.css">
-<title>Domain-Management</title>
+<title>Domain-Manager</title>
 <div class="container">
-  <h2>Domain-Management</h2>
+  <h2>Domain-Manager</h2>
   <div class="panel panel-default">
-    <div class="panel-heading">Your Domain</div>
+    <div class="panel-heading">Your domain</div>
     <div class="panel-body">
 """
 
 DOMAIN = "      <h4><span class=\"label label-default\">%s</span></h4>"
-NO_DOMAIN = "      <h4><span class=\"label label-Danger\">Could not resolve Domain.</span></h4>"
+NO_DOMAIN = "      <h4><span class=\"label label-danger\">Could not resolve domain.</span></h4>"
 
 HEADER2 = """
     </div>
   </div>
   <div class="panel panel-default">
-    <div class="panel-heading">Add a Domain</div>
+    <div class="panel-heading">Add a domain</div>
     <div class="panel-body">
       <form class="form-inline">
         <input type="hidden" name="action" value="add" />
@@ -43,7 +45,7 @@ HEADER2 = """
     </div>
   </div>
   <div class="panel panel-default">
-    <div class="panel-heading">Domain Overview</div>
+    <div class="panel-heading">Domain overview</div>
       <table class="table">
         <tr><th>Name</th><th>IP</th><th>Delete</th></tr>
 """
@@ -89,14 +91,15 @@ def info_page(env, responde):
 			a_record = zone.get_rdataset(domain, "a")
 			if a_record:
 				ip = str(a_record.items[0])
+                                name = str(domain).decode("idna").encode("utf-8")
 				if ip == env["REMOTE_ADDR"]:
-					delete = DELETE % domain
+					delete = DELETE % name
 				else:
 					delete = ""
-				yield ROW % (domain, ip, delete)
+				yield ROW % (name, ip, delete)
 	except dns.exception.DNSException:
 		traceback.print_exc()
-		yield ROW % ("Error", "loading", "Domains")
+		yield ROW % ("Error", "loading", "domains")
 	yield FOOTER 
 
 def domain_add(domain, ip):
@@ -130,7 +133,7 @@ def domain_manager(env, responde):
 				 domain_add(domain, env["REMOTE_ADDR"])
 			elif "delete" in params["action"]:
 				 domain_delete(domain, env["REMOTE_ADDR"])
-	responde("303 Dit it. Now go back", [("Location", env.get("HTTP_REFERER", env["SCRIPT_NAME"]))])
+	responde("303 Did it. Now go back", [("Location", env.get("HTTP_REFERER", env["SCRIPT_NAME"]))])
 	return []
 
 
