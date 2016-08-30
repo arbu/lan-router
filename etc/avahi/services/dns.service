@@ -1,0 +1,9 @@
+<?xml version="1.0" standalone='no'?>
+<!DOCTYPE service-group SYSTEM "avahi-service.dtd">
+<service-group>
+  <name>Official LAN DNS</name>
+  <service>
+    <type>_domain._udp</type>
+    <port>53</port>
+  </service>
+</service-group>
