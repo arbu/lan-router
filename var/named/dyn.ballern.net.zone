@@ -1,0 +1,67 @@
+$ORIGIN .
+$TTL 600	; 10 minutes
+dyn.ballern.net		IN SOA	nameserver.ballern.net. yourmom.ballern.net. (
+				2019097373 ; serial
+				1800       ; refresh (30 minutes)
+				300        ; retry (5 minutes)
+				7200       ; expire (2 hours)
+				300        ; minimum (5 minutes)
+				)
+			NS	nameserver.ballern.net.
+$ORIGIN dyn.ballern.net.
+$TTL 300	; 5 minutes
+A0001			A	10.13.37.144
+			DHCID	( AAEBRa++Uzl04mVxxscih3ZCgipMWHigf2G+zWwsVu0Q
+				LDg= ) ; 1 1 32
+$TTL 3600	; 1 hour
+Air-von-Hannes		A	10.13.37.170
+			DHCID	( AAEBRz+voMCQZYN23a8LnlPsztEJQgyNt0Os9v6zjBR0
+				QYs= ) ; 1 1 32
+$TTL 300	; 5 minutes
+Beccis-iPhone		A	10.13.37.207
+			DHCID	( AAEBv/1CT5JbgETmJvMryWTyxCx+BbAdYVKjRQt8Kzer
+				CL4= ) ; 1 1 32
+css-server		A	10.13.37.155
+			DHCID	( AAIBpcOICxk61V/r848El5sFvfIh0wLQDFVy2ViHzONx
+				wnw= ) ; 2 1 32
+DESKTOP-DLAFUSS		A	10.13.37.214
+			DHCID	( AAEBilIoE99aKEj2NGM8xPNlRdJz/7Cf81oHMDhwGBRa
+				GyI= ) ; 1 1 32
+DinoRechner		A	10.13.37.206
+			DHCID	( AAEBQdtzN4W6pmqGShEVquTnYLowdCcywC1h4DyzFgV0
+				9oc= ) ; 1 1 32
+FreshAir		A	10.13.37.180
+			DHCID	( AAEBRbgqN9dlVvi660gGeso6dRoPxUw7X7lHIofe4Bmf
+				6Oc= ) ; 1 1 32
+iPhone-von-Till		A	10.13.37.203
+			DHCID	( AAEBCrZt/J7KIxykHdmaRX7klnw+BNakOydz8RSZn8mM
+				36U= ) ; 1 1 32
+iPhone13promax		A	10.13.37.217
+			DHCID	( AAEBNkR28gppoEG1kTBCLlNqaMT1tGW7tFHS84wYEgjA
+				dSc= ) ; 1 1 32
+iPhonevnJessica		A	10.13.37.122
+			DHCID	( AAEBP6IkKtDRXS8o5N2kjpQfMUCZT9wccDRO3smIttrd
+				/zk= ) ; 1 1 32
+iRMCB35003		A	10.13.37.137
+			DHCID	( AAEBnl1W74DYfa3ilHPlg4/30y7/GRvUrUdAxfmu7Yq3
+				W74= ) ; 1 1 32
+iRMCC37A38		A	10.13.37.136
+			DHCID	( AAEBom2xh142VeW1dsic0ua2G25zRIKP58DuDgtwjL/U
+				YhA= ) ; 1 1 32
+OnePlus-Nord		A	10.13.37.164
+			DHCID	( AAEBDjN8eZ1iQihDpTwA79VZnKA3Dqep8YMuWqof0dYK
+				B9U= ) ; 1 1 32
+OnePlus3		A	10.13.37.195
+			DHCID	( AAEB2bP3PsJVoc4HgUgBo6QUe+6isrRJNdHGSrK6i09O
+				l4Y= ) ; 1 1 32
+Redmi7A-Dinophone	A	10.13.37.182
+			DHCID	( AAEBdxTY6FFGqPAZcKeq9LCNSmxt2TmBZFTQ4d1VDva7
+				9wk= ) ; 1 1 32
+$TTL 3600	; 1 hour
+Tills-MBP		A	10.13.37.142
+			DHCID	( AAEB3DpzMMyokVaQ0G4aX8LxJs5AA0DGdgrhVjrqSidu
+				KzM= ) ; 1 1 32
+$TTL 300	; 5 minutes
+ubnt			A	10.13.37.157
+			DHCID	( AAABLKg77ATw5CvchlAoX/gFN1cRrpxTUkplfIUlY/wX
+				RbM= ) ; 0 1 32

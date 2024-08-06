@@ -1,0 +1,38 @@
+$ORIGIN .
+$TTL 600	; 10 minutes
+ballern.net		IN SOA	nameserver.ballern.net. yourmom.ballern.net. (
+				2021081615 ; serial
+				1800       ; refresh (30 minutes)
+				300        ; retry (5 minutes)
+				7200       ; expire (2 hours)
+				300        ; minimum (5 minutes)
+				)
+			NS	nameserver.ballern.net.
+$TTL 300	; 5 minutes
+			A	10.13.37.23
+$ORIGIN ballern.net.
+aaron			A	10.13.37.209
+arbu			A	10.13.37.209
+cs			A	10.13.37.155
+css			A	10.13.37.155
+dns			A	10.13.37.1
+			AAAA	fd00:1337::1
+$ORIGIN dns.ballern.net.
+ipv4			A	10.13.37.1
+ipv6			AAAA	fd00:1337::1
+$ORIGIN ballern.net.
+docker1			A	10.13.37.138
+files			A	10.13.37.23
+info			A	10.13.37.17
+lukas			A	10.13.37.178
+mc			A	10.13.37.138
+minecraft		A	10.13.37.138
+nameserver		A	10.13.37.1
+			AAAA	fd00:1337::1
+omnibus			A	10.13.37.7
+rick			A	10.13.37.23
+router			A	10.13.42.10
+router1			A	10.13.37.10
+semmel			A	10.13.37.113
+ts			A	10.13.37.138
+wiki			A	10.13.37.138

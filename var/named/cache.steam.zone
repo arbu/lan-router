@@ -1,0 +1,12 @@
+; BIND reverse data file
+$TTL 86400
+@      IN      SOA      Linus. 10.13.37.194 (
+						1               ; Serial
+						604800          ; Refresh
+						86400           ; Retry
+						2419200         ; Expire
+						86400 )         ; Negative Cache TTL
+;
+@      IN      NS       Linus.
+@      IN      A        10.13.37.194
+*      IN      A        10.13.37.194

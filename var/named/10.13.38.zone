@@ -1,0 +1,12 @@
+$ORIGIN .
+$TTL 600	; 10 minutes
+38.13.10.in-addr.arpa	IN SOA	lan. yourmom.ballern.net. (
+				2015084746 ; serial
+				1800       ; refresh (30 minutes)
+				300        ; retry (5 minutes)
+				7200       ; expire (2 hours)
+				300        ; minimum (5 minutes)
+				)
+			NS	nameserver.ballern.net.
+$ORIGIN 38.13.10.in-addr.arpa.
+1			PTR	router.lan.

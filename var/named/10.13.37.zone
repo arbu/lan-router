@@ -1,0 +1,44 @@
+$ORIGIN .
+$TTL 600	; 10 minutes
+37.13.10.in-addr.arpa	IN SOA	lan. yourmom.ballern.net. (
+				2015087800 ; serial
+				1800       ; refresh (30 minutes)
+				300        ; retry (5 minutes)
+				7200       ; expire (2 hours)
+				300        ; minimum (5 minutes)
+				)
+			NS	nameserver.ballern.net.
+$ORIGIN 37.13.10.in-addr.arpa.
+1			PTR	router.lan.
+$TTL 300	; 5 minutes
+122			PTR	iPhonevnJessica.dyn.ballern.net.
+136			PTR	iRMCC37A38.dyn.ballern.net.
+137			PTR	iRMCB35003.dyn.ballern.net.
+141			PTR	Herms.dynamic.lan.
+$TTL 3600	; 1 hour
+142			PTR	Tills-MBP.dyn.ballern.net.
+$TTL 300	; 5 minutes
+151			PTR	iPhone-von-Till.dynamic.lan.
+154			PTR	android-c1354d866649e738.dynamic.lan.
+155			PTR	css-server.dyn.ballern.net.
+156			PTR	Beccis-iPhone.dynamic.lan.
+157			PTR	ubnt.dyn.ballern.net.
+164			PTR	OnePlus-Nord.dyn.ballern.net.
+166			PTR	JKsS8plus.dynamic.lan.
+$TTL 3600	; 1 hour
+170			PTR	Air-von-Hannes.dyn.ballern.net.
+$TTL 300	; 5 minutes
+171			PTR	Sophie-Staff.dynamic.lan.
+179			PTR	Rebeccas-MBP.dynamic.lan.
+180			PTR	FreshAir.dyn.ballern.net.
+187			PTR	Tills-MBP.dynamic.lan.
+191			PTR	amazon-1da6fc87f.dynamic.lan.
+194			PTR	Moritzs-Mini.dynamic.lan.
+203			PTR	iPhone-von-Till.dyn.ballern.net.
+206			PTR	DinoRechner.dyn.ballern.net.
+207			PTR	Beccis-iPhone.dyn.ballern.net.
+214			PTR	DESKTOP-DLAFUSS.dyn.ballern.net.
+215			PTR	MoritzHhersiPad.dynamic.lan.
+217			PTR	iPhone13promax.dyn.ballern.net.
+$TTL 600	; 10 minutes
+23			PTR	files.lan.

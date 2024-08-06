@@ -1,0 +1,13 @@
+$TTL 10m
+@       IN      SOA     lan. yourmom.ballern.net. (
+                                        2015083101 ; Serial
+                                        30m        ; Refresh
+                                        5m         ; Retry
+                                        2h         ; Expire
+                                        5m )       ; NX (TTL Negativ Cache)
+
+
+                                IN      NS      nameserver.ballern.net.
+
+1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0 IN      PTR     router.lan.
+3.2.0.0.0.0.0.0.0.0.0.0.0.0.0.0 IN      PTR     files.lan.
